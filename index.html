@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kyrstr1 | Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: rgb(255, 255, 255);
+            background: #0d0d0d;
+            overflow-x: hidden;
+        }
+        /* animated background */
+        #bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        /* layout */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        header h1 {
+            font-size: 38px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        header p {
+            opacity: .7;
+        }
+        section {
+            margin-bottom: 50px;
+        }
+        h2 {
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+            padding: 25px;
+            border-radius: 12px;
+            line-height: 1.7;
+            border: 1px solid rgba(194, 206, 215, 0.501);
+        }
+        /* project button */
+        .project-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all .3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-btn span {
+            display: inline-block;
+            transition: transform .3s;
+        }
+        .project-btn:hover {
+            background: #1a1a1a;
+            border-color: #182636;
+            box-shadow: 0 0 10px rgba(75, 148, 221, 0.616);
+        }
+        .project-btn:hover span {
+            transform: translateX(4px);
+        }
+        footer {
+            text-align: center;
+            opacity: .6;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+        /* mobile */
+        @media(max-width:600px) {
+            header h1 {
+                font-size: 28px;
+            }
+            .container {
+                padding: 25px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="bg"></canvas>
+    <div class="container">
+        <header>
+            <h1>Mehmet Kayra Satır</h1>
+        </header>
+        <section>
+            <h2>Hakkımda</h2>
+            <div class="card">
+                Selam, ben Mehmet Kayra Satır.
+
+                Yazılım alanında özellikle web projeleri ile ilgilensem de son dönemlerde ağırlıklı olarak makina ve
+                imalat sektörüne odaklanmış bulunuyorum.
+
+                Lisede eğitimimi Makina Ressamlığı alanında aldım ve bu süreçte 2D ve 3D teknik çizim programlarını
+                aktif şekilde kullanma becerisi kazandım.
+
+                Stajımı imalat sahasında, hidrolik sistemler üzerine çalışan bir firmada yaptım ve sonrasında aynı
+                firmada çalışmaya devam ettim.
+
+                Daha sonra iki farklı firmada CNC Freze tezgahlarında çalışma fırsatım oldu. Tezgah ayarlama, kesici
+                takım seçimi ve üretim süreçleri konusunda deneyim kazandım.
+
+                Şu anda hem makina hem yazılım alanında kendimi geliştirmeye devam ediyorum.
+            </div>
+        </section>
+        <section>
+            <h2>Projem</h2>
+            <div class="card">
+                <b>Delik Dizilimi Hesaplama</b>
+                <p>
+                    Manuel frezede kullanılan delik dizilimi hesaplamalarını hızlı şekilde yapabilmek için geliştirdiğim
+                    bir web aracı.
+                </p>
+                <a class="project-btn" href="https://kyrstr1.github.io/DelikDizilimiHesaplama/" target="_blank">
+                    <span>Projeyi Gör →</span>
+                </a>
+            </div>
+        </section>
+        <footer>
+            2026 Mehmet Kayra SATIR
+        </footer>
+    </div>
+    <script>
+        const canvas = document.getElementById("bg")
+        const ctx = canvas.getContext("2d")
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+        let offset = 0
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            let size = 40
+            ctx.strokeStyle = "rgba(255,255,255,0.05)"
+            ctx.lineWidth = 1
+            for (let x = 0; x < canvas.width; x += size) {
+                ctx.beginPath()
+                ctx.moveTo(x + offset, 0)
+                ctx.lineTo(x + offset, canvas.height)
+                ctx.stroke()
+            }
+            for (let y = 0; y < canvas.height; y += size) {
+                ctx.beginPath()
+                ctx.moveTo(0, y + offset)
+                ctx.lineTo(canvas.width, y + offset)
+                ctx.stroke()
+            }
+            offset += 0.05
+            requestAnimationFrame(draw)
+        }
+        draw()
+        window.addEventListener("resize", () => {
+            canvas.width = window.innerWidth
+            canvas.height = window.innerHeight
+        })
+    </script>
+</body>
+</html>
